@@ -67,16 +67,23 @@ git push
 still pushes). The game loads **same-origin**, so there's no CORS or
 frame-blocking to worry about.
 
-### Hosting a file this large
+### Hosting a file this large — auto-deploy to GitHub Pages
 
-- **GitHub Pages (recommended):** Settings → Pages → *Deploy from a branch* →
-  pick the branch → `/root`. Serves files up to ~100 MB reliably. The whole
-  launcher + game are then at `https://lauraevan.github.io/mclauncherrep/`.
-- **githack:** fine for the launcher shell, but a free proxy — an 82 MB file may
-  be slow or fail, so prefer Pages for the game.
+A workflow at `.github/workflows/deploy-pages.yml` publishes the whole site
+(launcher + `game/index.html`) to GitHub Pages on every push. **One-time setup:**
+repo **Settings → Pages → Build and deployment → Source: _GitHub Actions_**.
+(Runs before you flip that switch will fail — that's expected.)
+
+Once enabled, every push deploys to `https://lauraevan.github.io/mclauncherrep/`,
+which serves the 86 MB game reliably and same-origin. If a deploy from this
+feature branch is blocked by branch rules, allow it under **Settings →
+Environments → github-pages → Deployment branches**, or merge to `main`.
+
+- **githack** stays fine for the launcher shell, but it's a free proxy that can
+  choke on an 86 MB file — prefer Pages for the game.
 
 While the large file loads, the game window shows a **spinner**; there's also an
-**"Open in new tab"** button as a fallback.
+**"Open in new tab"** fallback button.
 
 ## Real Minecraft "mail" (news & patch notes)
 

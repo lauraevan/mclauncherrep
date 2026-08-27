@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+# Publishes the whole repo (launcher + game/index.html) to GitHub Pages.
+# ONE-TIME SETUP: repo Settings -> Pages -> "Build and deployment" ->
+#   Source: GitHub Actions.  (Runs before that will fail — that's expected.)
+# If deploying from this feature branch is blocked by the environment's
+# branch rules, either allow it under Settings -> Environments ->
+# github-pages -> Deployment branches, or merge this branch into main.
+
+on:
+  push:
+    branches:
+      - main
+      - claude/minecraft-launcher-replica-bakqq2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; let an in-progress run finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # the whole repo root is the site; game/index.html ships with it
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
