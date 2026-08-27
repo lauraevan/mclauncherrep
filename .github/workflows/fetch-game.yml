@@ -1,0 +1,66 @@
+name: Fetch game from Google Drive
+
+# Phone-only way to get the 86 MB build into the repo — no computer needed.
+#   1. In Google Drive, open the file -> Share -> General access ->
+#      "Anyone with the link" (Viewer).
+#   2. On your phone, open this repo's Actions tab -> "Fetch game from Google
+#      Drive" -> Run workflow. The file ID below is pre-filled.
+#   3. GitHub's runner downloads the file and commits it to game/index.html.
+# (You can turn the Drive link back to private afterwards.)
+
+on:
+  workflow_dispatch:
+    inputs:
+      drive_file_id:
+        description: "Google Drive FILE ID (share it 'Anyone with the link' first)"
+        required: true
+        default: "1vomssHcpijVbE-CU6h08U44sw7OoKB8b"
+      dest:
+        description: "Where to save it in the repo"
+        required: true
+        default: "game/index.html"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install gdown
+        run: pip install --quiet gdown
+
+      - name: Download from Google Drive
+        env:
+          ID: ${{ github.event.inputs.drive_file_id }}
+          DEST: ${{ github.event.inputs.dest }}
+        run: |
+          set -e
+          mkdir -p "$(dirname "$DEST")"
+          gdown "https://drive.google.com/uc?id=${ID}" -O "$DEST"
+          echo "Downloaded:"; ls -lh "$DEST"
+          bytes=$(stat -c%s "$DEST")
+          echo "size = $bytes bytes"
+          if [ "$bytes" -lt 1000000 ]; then
+            echo "::error::Only $bytes bytes downloaded — the Drive file is probably not shared publicly. Set it to 'Anyone with the link' and re-run."
+            echo "--- first 400 bytes of what came back ---"
+            head -c 400 "$DEST" || true
+            exit 1
+          fi
+
+      - name: Commit & push
+        env:
+          DEST: ${{ github.event.inputs.dest }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          if git diff --cached --quiet; then
+            echo "No changes to commit — the file already matches."
+          else
+            git commit -m "Add game build fetched from Google Drive ($DEST)"
+            git push
+          fi
