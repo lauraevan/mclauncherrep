@@ -7,18 +7,13 @@
   /* ------------------------------------------------------------
      GAME INTEGRATION POINT
      --------------------------------------------------------------
-     The real game ("novix core 26.1.2") is loaded into an <iframe>
-     when PLAY is pressed. Point GAME_URL at your build:
-
-       • Local file (default): drop your saved HTML at  game/index.html
-       • A subfolder build:     "game/novix/index.html"
-       • A live URL:            "https://your-host.example/novix"
-
-     Because the launcher is served over HTTPS on githack, the game
-     it loads must also be reachable over HTTPS (a local file in this
-     repo works perfectly).
+     The real game ("novix core 26.1.2") loads into an <iframe> when
+     PLAY is pressed. GAME_URL points at the hosted build (catbox).
+     Swap it for any HTTPS URL, or a local "game/index.html".
+     If the host sends a frame-blocking header, the "Open in new tab"
+     button in the game window opens it directly instead.
      ------------------------------------------------------------ */
-  var GAME_URL = "game/index.html";
+  var GAME_URL = "https://files.catbox.moe/olevzn.html";
 
   var LABELS = {
     home: "HOME",
@@ -109,24 +104,30 @@
   var overlay = $("#gameOverlay");
   var frame = $("#gameFrame");
   var playBtn = $("#playBtn");
+  var gameLoading = $("#gameLoading");
 
   function launchGame() {
-    playBtn.textContent = "LAUNCHING…";
-    setTimeout(function () {
-      frame.src = GAME_URL;
-      overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden", "false");
-      playBtn.textContent = "PLAY";
-    }, 350);
+    if (gameLoading) gameLoading.style.display = "flex";
+    frame.src = GAME_URL;
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
   function closeGame() {
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
     frame.src = "about:blank"; /* stop the game / free resources */
+    if (gameLoading) gameLoading.style.display = "flex"; /* reset for next launch */
+    document.body.style.overflow = "";
   }
+  if (frame) frame.addEventListener("load", function () {
+    if (frame.src && frame.src.indexOf("about:blank") === -1 && gameLoading) gameLoading.style.display = "none";
+  });
 
   if (playBtn) playBtn.addEventListener("click", launchGame);
   $("#gameBack").addEventListener("click", closeGame);
+  var newtab = $("#gameNewtab");
+  if (newtab) newtab.addEventListener("click", function () { window.open(GAME_URL, "_blank", "noopener"); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && overlay.classList.contains("open")) closeGame();
   });

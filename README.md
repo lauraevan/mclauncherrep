@@ -40,19 +40,22 @@ https://raw.githack.com/lauraevan/mclauncherrep/claude/minecraft-launcher-replic
 - Use `rawcdn.githack.com/...` instead of `raw.githack.com/...` for the
   cached/production CDN URL.
 
-## Adding the game (novix core 26.1.2)
+## The game (novix core 26.1.2)
 
-The launcher loads the game into an `<iframe>` when **PLAY** is pressed.
+When **PLAY** is pressed the launcher loads the game into a full-screen
+`<iframe>`. The 82 MB build is hosted on catbox, so `GAME_URL` at the top of
+`js/launcher.js` points at it:
 
-1. Take your saved build (`view-source_https___t9os.space_novix.html`).
-2. Rename it to `index.html` and put it at **`game/index.html`** (replace the
-   placeholder there).
-3. Keep any asset folder the build needs next to it (e.g. `game/novix/…`).
-4. If the entry file isn't `game/index.html`, set `GAME_URL` at the top of
-   `js/launcher.js` to the correct path (a local path or a full `https://` URL).
+```js
+var GAME_URL = "https://files.catbox.moe/olevzn.html";
+```
 
-> Served over HTTPS on githack, so the game it loads must also be reachable over
-> HTTPS. A local file committed into this repo works perfectly.
+- While the large file downloads, a **loading spinner** is shown; it hides once
+  the game finishes loading.
+- If the host ever sends a frame-blocking header, the **"Open in new tab"**
+  button in the game window opens the build directly instead.
+- To use a different build, just change `GAME_URL` (any HTTPS URL, or a local
+  `game/index.html`). Served over HTTPS on githack, so the target must be HTTPS.
 
 ## Real Minecraft "mail" (news & patch notes)
 

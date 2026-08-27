@@ -222,8 +222,13 @@
       <button class="game-back" id="gameBack" type="button">&#8592; Back to Launcher</button>
       <div class="game-title">Minecraft &middot; novix core 26.1.2</div>
       <div class="game-spacer"></div>
+      <button class="game-newtab" id="gameNewtab" type="button">Open in new tab &#8599;</button>
     </div>
     <div class="game-frame-wrap">
+      <div class="game-loading" id="gameLoading">
+        <div class="gl-spinner"></div>
+        <div class="gl-text">Loading Minecraft&#8230;<span>large build &mdash; the first load can take a bit</span></div>
+      </div>
       <iframe id="gameFrame" class="game-frame" title="Minecraft" allow="fullscreen; gamepad; pointer-lock; autoplay" allowfullscreen></iframe>
     </div>
   </div>
