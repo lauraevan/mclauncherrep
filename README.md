@@ -50,32 +50,25 @@ When **PLAY** is pressed the launcher loads the game into a full-screen
 var GAME_URL = "game/index.html";
 ```
 
-### Add your 82 MB build (do this on your machine)
+The game (`game/index.html`, ~69.5 MB) is **already committed**. It loads
+same-origin, so there's no CORS or frame-blocking to worry about.
 
-The build is too large to move through the hosted agent, so add it yourself:
+> Note: the originally uploaded file was a Chrome **`view-source:` save** — a
+> 156k-row table that only *displays* the game's HTML. The real, runnable game
+> was extracted from those cells and committed here; it boots to the
+> "Minecraft 26.1.2 — eag26 (single file)" title and needs a normal GPU browser
+> (any phone/PC), which the headless CI sandbox lacks.
+>
+> The two workflows under `.github/workflows/` (`fetch-game.yml`,
+> `deploy-pages.yml`) remain if you ever want to re-fetch a newer build from a
+> shared Drive link or auto-deploy.
 
-```bash
-git clone https://github.com/lauraevan/mclauncherrep
-cd mclauncherrep && git checkout claude/minecraft-launcher-replica-bakqq2
-cp /path/to/your/build.html game/index.html   # replace the placeholder
-git add game/index.html
-git commit -m "Add novix core 26.1.2 build"
-git push
-```
+### Hosting a file this large — GitHub Pages
 
-82 MB is under GitHub's 100 MB per-file limit (you'll see a >50 MB warning — it
-still pushes). The game loads **same-origin**, so there's no CORS or
-frame-blocking to worry about.
-
-### Hosting a file this large — auto-deploy to GitHub Pages
-
-A workflow at `.github/workflows/deploy-pages.yml` publishes the whole site
-(launcher + `game/index.html`) to GitHub Pages on every push. **One-time setup:**
-repo **Settings → Pages → Build and deployment → Source: _GitHub Actions_**.
-(Runs before you flip that switch will fail — that's expected.)
-
-Once enabled, every push deploys to `https://lauraevan.github.io/mclauncherrep/`,
-which serves the 86 MB game reliably and same-origin. If a deploy from this
+Serve the whole site (launcher + game) from **GitHub Pages** rather than githack,
+which can choke on ~70 MB. **One-time setup:** repo **Settings → Pages → Build
+and deployment → Source: _GitHub Actions_** — then `deploy-pages.yml` publishes to
+`https://lauraevan.github.io/mclauncherrep/` on every push. If a deploy from this
 feature branch is blocked by branch rules, allow it under **Settings →
 Environments → github-pages → Deployment branches**, or merge to `main`.
 
