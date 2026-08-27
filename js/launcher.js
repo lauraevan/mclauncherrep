@@ -90,6 +90,21 @@
     n.addEventListener("click", function () { selectView(n.dataset.view); });
   });
 
+  /* ---------------- Mobile drawer ---------------- */
+  var sidebar = $(".sidebar"), scrim = $("#sidebarScrim"), menuBtn = $("#menuBtn");
+  function setDrawer(open) {
+    if (sidebar) sidebar.classList.toggle("open", open);
+    if (scrim) scrim.classList.toggle("open", open);
+  }
+  if (menuBtn) menuBtn.addEventListener("click", function () {
+    setDrawer(!(sidebar && sidebar.classList.contains("open")));
+  });
+  if (scrim) scrim.addEventListener("click", function () { setDrawer(false); });
+  /* close the drawer after picking a game/section on mobile */
+  $$("#primaryNav .nav-item, .nav-bottom .nav-item").forEach(function (n) {
+    n.addEventListener("click", function () { setDrawer(false); });
+  });
+
   /* ---------------- PLAY -> game overlay ---------------- */
   var overlay = $("#gameOverlay");
   var frame = $("#gameFrame");
