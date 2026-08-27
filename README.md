@@ -14,7 +14,9 @@ A pixel-matched, browser-based replica of the **Minecraft Launcher** (Java Editi
 | `css/launcher.css` | Pixel-matched styling |
 | `js/launcher.js` | Tabs, sidebar, PLAY → game window. **`GAME_URL` config lives here.** |
 | `js/news.js` | Fetches **real Minecraft news & patch notes** from Mojang, live |
-| `assets/hero.webp` | Real Minecraft: Java Edition key-art hero image |
+| `assets/hero-art.png` | Pixel-exact hero art (front layer) matching the launcher crop |
+| `assets/hero.webp` | Full key-art (back layer, fills the sliver revealed under the Realm panel) |
+| `assets/icons/{bedrock,dungeons,dungeons2}` | Real block/fire/eye textures for the sidebar game icons |
 | `assets/ui/play-button.png` | Real green pixel **PLAY** button (trimmed) |
 | `assets/ui/minecraft-logo.png` | Real **MINECRAFT · JAVA EDITION** logo (the hero header) |
 | `assets/ui/gift.png` | Real "Give the gift of Minecraft" + **Buy as Gift** ad |
