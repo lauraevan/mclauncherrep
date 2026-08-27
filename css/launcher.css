@@ -3,7 +3,7 @@
    ============================================================ */
 :root{
   --sidebar-bg:#1b1b1b;
-  --sidebar-w:176px;
+  --sidebar-w:168px;
   --content-bg:#0d0d0d;
   --panel:#1c1c1c;
   --nav-active:#333333;
@@ -55,7 +55,7 @@ img{display:block;max-width:100%}
   font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;line-height:1.15;
 }
 .nav-item:hover{background:#262626;color:var(--text)}
-.nav-item.active{background:var(--nav-active);color:#fff}
+.nav-item.active{background:#2c302a;color:#fff;box-shadow:inset 3px 0 0 var(--green)}
 .nav-ico{width:30px;height:30px;flex:0 0 30px;display:flex;align-items:center;justify-content:center;color:#d6d6d6}
 .nav-ico img{width:28px;height:28px}
 .nav-label{flex:1}
@@ -92,22 +92,22 @@ img{display:block;max-width:100%}
 /* ===================== HERO ===================== */
 .hero{position:relative;width:100%;height:392px;overflow:hidden;background:#0b1622}
 .hero-img{width:100%;height:100%;object-fit:cover}
-.hero-fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 30%),linear-gradient(0deg,rgba(0,0,0,.35),transparent 40%)}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.28),transparent 26%)}
 
-.hero-logo{position:absolute;top:28px;left:0;right:340px;display:flex;flex-direction:column;align-items:center;pointer-events:none;text-shadow:3px 3px 0 rgba(0,0,0,.55)}
-.hl-main{font-family:'Press Start 2P',monospace;font-size:34px;color:#dfe7ee;letter-spacing:2px}
-.hl-sub{font-family:'Press Start 2P',monospace;font-size:15px;color:#c7d0d8;letter-spacing:4px;margin-top:8px}
+.hero-logo-wrap{position:absolute;top:20px;left:0;right:300px;display:flex;justify-content:center;pointer-events:none}
+.hero-logo-img{width:300px;max-width:44%;height:auto;filter:drop-shadow(3px 4px 3px rgba(0,0,0,.5))}
+.hero-arrow{position:absolute;left:12px;bottom:12px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hero-arrow:hover{background:rgba(0,0,0,.7)}
 
 /* Realm promo panel (right) */
 .realm-promo{
-  position:absolute;top:0;right:0;width:340px;height:100%;
-  background:linear-gradient(180deg,rgba(12,12,12,.78),rgba(10,10,10,.92));
+  position:absolute;top:0;right:0;width:300px;height:100%;
+  background:linear-gradient(180deg,rgba(10,10,10,.95) 0%,rgba(10,10,10,.9) 42%,rgba(10,10,10,.5) 70%,rgba(10,10,10,.22) 100%);
   padding:26px 24px;display:flex;flex-direction:column;
-  border-left:1px solid rgba(255,255,255,.06);
 }
 .rp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;color:#fff;font-size:22px;font-weight:800;line-height:1.15}
 .rp-head svg{color:#bdbdbd;flex:0 0 auto;margin-top:4px}
-.realm-promo p{color:#cfcfcf;font-size:14px;line-height:1.5;margin:14px 0 auto}
+.realm-promo p{color:#cfcfcf;font-size:14px;line-height:1.5;margin:12px 0 16px}
 .btn-purple{
   align-self:flex-start;background:var(--purple);color:#fff;border:none;cursor:pointer;
   font-family:inherit;font-weight:700;font-size:13px;padding:10px 18px;border-radius:3px;
@@ -129,7 +129,7 @@ img{display:block;max-width:100%}
 .btn-gift:hover{background:#fff}
 
 /* ===================== PLAY BAR ===================== */
-.play-bar{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;height:96px;background:var(--content-bg)}
+.play-bar{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;height:90px;background:var(--content-bg)}
 .version-select{
   position:absolute;left:22px;top:50%;transform:translateY(-50%);
   display:flex;align-items:center;gap:10px;width:232px;
@@ -143,16 +143,9 @@ img{display:block;max-width:100%}
 .vs-sub{font-size:10.5px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vs-chev{color:var(--text-dim);flex:0 0 auto}
 
-.play-btn{
-  width:330px;height:52px;cursor:pointer;color:#fff;
-  font-family:'Press Start 2P',monospace;font-size:19px;letter-spacing:2px;
-  background:linear-gradient(180deg,var(--green-top),var(--green) 55%,var(--green-bottom));
-  border:none;border-radius:2px;
-  border-top:1px solid #86d95a;border-bottom:3px solid #2f5f1a;
-  text-shadow:2px 2px 0 rgba(0,0,0,.35);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.25);
-}
-.play-btn:hover{filter:brightness(1.07)}
+.play-btn{background:none;border:none;padding:0;cursor:pointer;width:300px;line-height:0}
+.play-btn img{width:100%;height:auto;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+.play-btn:hover img{filter:drop-shadow(0 3px 5px rgba(0,0,0,.55)) brightness(1.05)}
 .play-btn:active{transform:translateY(1px)}
 
 .server-stack{cursor:pointer;display:flex;align-items:center}

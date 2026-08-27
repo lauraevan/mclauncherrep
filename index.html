@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minecraft Launcher</title>
-  <link rel="icon" type="image/svg+xml" href="assets/icons/grass-block.svg" />
+  <link rel="icon" type="image/png" href="assets/icons/grass-block.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
@@ -16,7 +16,7 @@
     <!-- ============ SIDEBAR ============ -->
     <aside class="sidebar">
       <button class="account" type="button" title="Microsoft account">
-        <img class="account-avatar" src="assets/icons/avatar.svg" alt="" />
+        <img class="account-avatar" src="assets/icons/avatar.png" alt="" />
         <span class="account-text">
           <span class="account-name">EvanEnderD&#8230;</span>
           <span class="account-sub">Microsoft account</span>
@@ -34,27 +34,27 @@
         </button>
 
         <button class="nav-item active" data-view="java" type="button">
-          <span class="nav-ico"><img src="assets/icons/grass-block.svg" alt="" /></span>
+          <span class="nav-ico"><img src="assets/icons/grass-block.png" alt="" /></span>
           <span class="nav-label">Minecraft:<br>Java Edition</span>
         </button>
 
         <button class="nav-item" data-view="bedrock" type="button">
-          <span class="nav-ico"><img src="assets/icons/bedrock.svg" alt="" /></span>
+          <span class="nav-ico"><img src="assets/icons/bedrock.png" alt="" /></span>
           <span class="nav-label">Minecraft:<br>Bedrock Edition</span>
         </button>
 
         <button class="nav-item" data-view="dungeons2" type="button">
-          <span class="nav-ico"><img src="assets/icons/dungeons2.svg" alt="" /></span>
+          <span class="nav-ico"><img src="assets/icons/dungeons2.png" alt="" /></span>
           <span class="nav-label">Minecraft<br>Dungeons II</span>
         </button>
 
         <button class="nav-item" data-view="dungeons" type="button">
-          <span class="nav-ico"><img src="assets/icons/dungeons.svg" alt="" /></span>
+          <span class="nav-ico"><img src="assets/icons/dungeons.png" alt="" /></span>
           <span class="nav-label">Minecraft<br>Dungeons</span>
         </button>
 
         <button class="nav-item" data-view="legends" type="button">
-          <span class="nav-ico"><img src="assets/icons/legends.svg" alt="" /></span>
+          <span class="nav-ico"><img src="assets/icons/legends.png" alt="" /></span>
           <span class="nav-label">Minecraft<br>Legends</span>
         </button>
       </nav>
@@ -97,13 +97,15 @@
         <!-- ---- PLAY TAB ---- -->
         <section class="tab-panel active" data-panel="play">
           <div class="hero">
-            <img class="hero-img" src="assets/placeholders/hero.svg" alt="Featured" />
-            <div class="hero-fade"></div>
+            <img class="hero-img" src="assets/hero.webp" alt="Minecraft: Java Edition" />
 
-            <div class="hero-logo">
-              <span class="hl-main">MINECRAFT</span>
-              <span class="hl-sub">JAVA EDITION</span>
+            <div class="hero-logo-wrap">
+              <img class="hero-logo-img" src="assets/ui/minecraft-logo.png" alt="Minecraft Java Edition" />
             </div>
+
+            <button class="hero-arrow" type="button" aria-label="Previous">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
 
             <aside class="realm-promo">
               <div class="rp-head">
@@ -122,7 +124,7 @@
 
           <div class="play-bar">
             <button class="version-select" type="button">
-              <img class="vs-ico" src="assets/icons/fabric.svg" alt="" />
+              <img class="vs-ico" src="assets/icons/fabric.png" alt="" />
               <span class="vs-text">
                 <span class="vs-name">fabric-loader-1.21.4</span>
                 <span class="vs-sub">fabric-loader-0.19.2-1.21.4</span>
@@ -130,7 +132,9 @@
               <svg class="vs-chev" viewBox="0 0 16 16" width="16" height="16"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
 
-            <button class="play-btn" id="playBtn" type="button">PLAY</button>
+            <button class="play-btn" id="playBtn" type="button" aria-label="Play">
+              <img src="assets/ui/play-button.png" alt="PLAY" />
+            </button>
 
             <div class="server-stack" title="Servers">
               <svg viewBox="0 0 24 24" width="34" height="34"><rect x="3" y="4" width="18" height="5" rx="1" fill="#57a545"/><rect x="3" y="10" width="18" height="5" rx="1" fill="#4b9139"/><rect x="3" y="16" width="18" height="5" rx="1" fill="#3f7c30"/><circle cx="7" cy="6.5" r="1" fill="#dff5d5"/><circle cx="7" cy="12.5" r="1" fill="#dff5d5"/><circle cx="7" cy="18.5" r="1" fill="#dff5d5"/></svg>
@@ -150,7 +154,6 @@
           </div>
 
           <section class="news-row" id="newsRow">
-            <!-- news cards injected by js/news.js -->
             <div class="news-card skeleton"></div>
             <div class="news-card skeleton"></div>
             <div class="news-card skeleton"></div>
@@ -172,17 +175,17 @@
             <button class="btn-green-sm" type="button">+ New installation</button>
           </div>
           <div class="inst-row">
-            <img src="assets/icons/fabric.svg" class="inst-ico" alt="" />
+            <img src="assets/icons/fabric.png" class="inst-ico" alt="" />
             <div class="inst-meta"><b>fabric-loader-1.21.4</b><span>fabric-loader-0.19.2-1.21.4</span></div>
             <button class="btn-green-sm play-inline" type="button">Play</button>
           </div>
           <div class="inst-row">
-            <img src="assets/icons/grass-block.svg" class="inst-ico" alt="" />
+            <img src="assets/icons/grass-block.png" class="inst-ico" alt="" />
             <div class="inst-meta"><b>Latest Release</b><span>1.21.4</span></div>
             <button class="btn-green-sm play-inline" type="button">Play</button>
           </div>
           <div class="inst-row">
-            <img src="assets/icons/grass-block.svg" class="inst-ico" alt="" />
+            <img src="assets/icons/grass-block.png" class="inst-ico" alt="" />
             <div class="inst-meta"><b>Latest Snapshot</b><span>25w02a</span></div>
             <button class="btn-green-sm play-inline" type="button">Play</button>
           </div>

@@ -14,8 +14,11 @@ A pixel-matched, browser-based replica of the **Minecraft Launcher** (Java Editi
 | `css/launcher.css` | Pixel-matched styling |
 | `js/launcher.js` | Tabs, sidebar, PLAY → game window. **`GAME_URL` config lives here.** |
 | `js/news.js` | Fetches **real Minecraft news & patch notes** from Mojang, live |
-| `assets/icons/*` | Recreated block/UI icons (SVG) |
-| `assets/placeholders/*` | Placeholder hero / news / realm images (swap for real art later) |
+| `assets/hero.webp` | Real Minecraft: Java Edition key-art hero image |
+| `assets/ui/play-button.png` | Real green pixel **PLAY** button (trimmed) |
+| `assets/ui/minecraft-logo.png` | Real **MINECRAFT · JAVA EDITION** logo (the hero header) |
+| `assets/icons/*` | Block/UI icons as **PNG** (with the `.svg` sources kept alongside) |
+| `assets/placeholders/*` | Placeholder news / realm images (news is replaced live from Mojang) |
 | `game/index.html` | **Drop-in slot for the actual game build** |
 
 ## Hosting on githack
@@ -57,11 +60,13 @@ These run in the visitor's browser, so they populate automatically when the page
 is opened online. If the network is unavailable, the UI falls back to placeholder
 cards so it never looks broken.
 
-## Placeholders
+## Assets
 
-Per the current phase, the **main pictures are placeholders** (hero banner, news
-images, realm art) in `assets/placeholders/`. Replace those SVGs (or repoint the
-`src`/API image handling) with final art when ready.
+The hero key art, the **MINECRAFT · JAVA EDITION** logo header, the green **PLAY**
+button and every sidebar icon use the real assets (`assets/hero.webp`,
+`assets/ui/*`, `assets/icons/*.png`). News-card images populate live from Mojang;
+only the realm-tab art and the offline news fallback remain placeholder SVGs in
+`assets/placeholders/`.
 
 ## Local preview
 
