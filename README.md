@@ -17,7 +17,11 @@ A pixel-matched, browser-based replica of the **Minecraft Launcher** (Java Editi
 | `assets/hero.webp` | Real Minecraft: Java Edition key-art hero image |
 | `assets/ui/play-button.png` | Real green pixel **PLAY** button (trimmed) |
 | `assets/ui/minecraft-logo.png` | Real **MINECRAFT · JAVA EDITION** logo (the hero header) |
+| `assets/ui/gift.png` | Real "Give the gift of Minecraft" + **Buy as Gift** ad |
+| `assets/ui/gamepass.png` | Real **Included with PC GAME PASS** badge |
+| `assets/icons/java.webp` | Real isometric grass-block Java Edition icon |
 | `assets/icons/*` | Block/UI icons as **PNG** (with the `.svg` sources kept alongside) |
+| `assets/fonts/*` + `css/fonts.css` | Self-hosted fonts (Pixelify Sans, Press Start 2P, Noto Sans) — no external dependency |
 | `assets/placeholders/*` | Placeholder news / realm images (news is replaced live from Mojang) |
 | `game/index.html` | **Drop-in slot for the actual game build** |
 

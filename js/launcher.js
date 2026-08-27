@@ -126,9 +126,9 @@
     setTimeout(function () { copyBtn.title = "Copy username"; }, 1200);
   });
 
-  var tipX = $(".tip-x");
-  if (tipX) tipX.addEventListener("click", function () {
-    var t = $(".gift-tip"); if (t) t.style.display = "none";
+  var giftClose = $(".gift-close");
+  if (giftClose) giftClose.addEventListener("click", function () {
+    var a = $("#giftAd"); if (a) a.style.display = "none";
   });
 
 })();

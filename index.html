@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minecraft Launcher</title>
-  <link rel="icon" type="image/png" href="assets/icons/grass-block.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/webp" href="assets/icons/java.webp" />
+  <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/launcher.css" />
 </head>
 <body>
@@ -34,7 +32,7 @@
         </button>
 
         <button class="nav-item active" data-view="java" type="button">
-          <span class="nav-ico"><img src="assets/icons/grass-block.png" alt="" /></span>
+          <span class="nav-ico"><img class="ico-java" src="assets/icons/java.webp" alt="" /></span>
           <span class="nav-label">Minecraft:<br>Java Edition</span>
         </button>
 
@@ -116,10 +114,10 @@
               <button class="btn-purple" type="button">Try it now</button>
             </aside>
 
-            <div class="gift-tip">Give the gift of Minecraft and play together with your friends!
-              <span class="tip-x">&times;</span>
+            <div class="gift-ad" id="giftAd">
+              <img src="assets/ui/gift.png" alt="Give the gift of Minecraft and play together with your friends! Buy as Gift" />
+              <button class="gift-close" type="button" aria-label="Dismiss"></button>
             </div>
-            <button class="btn-gift" type="button">Buy as Gift <span class="gift-emoji">&#127873;</span></button>
           </div>
 
           <div class="play-bar">
@@ -145,7 +143,7 @@
           </div>
 
           <div class="play-meta">
-            <div class="included">Included with <span class="gamepass"><span class="xbox">&#9679;</span> PC GAME PASS</span></div>
+            <img class="gamepass-img" src="assets/ui/gamepass.png" alt="Included with PC GAME PASS" />
             <div class="username">EvanEnderDragon1
               <button class="copy-btn" type="button" title="Copy username">
                 <svg viewBox="0 0 24 24" width="16" height="16"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 16H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
