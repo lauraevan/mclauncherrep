@@ -8,12 +8,13 @@
      GAME INTEGRATION POINT
      --------------------------------------------------------------
      The real game ("novix core 26.1.2") loads into an <iframe> when
-     PLAY is pressed. GAME_URL points at the hosted build (catbox).
-     Swap it for any HTTPS URL, or a local "game/index.html".
-     If the host sends a frame-blocking header, the "Open in new tab"
-     button in the game window opens it directly instead.
+     PLAY is pressed. GAME_URL is a LOCAL, bundled file: drop your
+     82 MB build in at game/index.html (replacing the placeholder) and
+     it loads same-origin — no external host, no CORS, no frame limits.
+     See README ("The game") for how to add the large file + host on
+     GitHub Pages (githack is unreliable for files this large).
      ------------------------------------------------------------ */
-  var GAME_URL = "https://files.catbox.moe/olevzn.html";
+  var GAME_URL = "game/index.html";
 
   var LABELS = {
     home: "HOME",

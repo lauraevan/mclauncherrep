@@ -35,17 +35,18 @@
        inside its play window when you press <b>PLAY</b>.</p>
 
     <div class="steps">
-      <p><b>1.</b> Take your saved build file<br>
-         <code>view-source_https___t9os.space_novix.html</code></p>
-      <p><b>2.</b> Rename it to <code>index.html</code> and place it here:<br>
-         <code>game/index.html</code> &nbsp;(replacing this file)</p>
-      <p><b>3.</b> Keep any folder of game assets it needs alongside it, e.g.
-         <code>game/novix/</code>, then point <code>GAME_URL</code> in
-         <code>js/launcher.js</code> at it if needed.</p>
-      <p><b>4.</b> Commit &amp; push — githack serves it automatically.</p>
+      <p><b>1.</b> On your computer, clone this repo (or open your local copy).</p>
+      <p><b>2.</b> Copy your 82&nbsp;MB build in as <code>game/index.html</code>,
+         replacing this file.</p>
+      <p><b>3.</b> <code>git add game/index.html &amp;&amp; git commit -m "add game" &amp;&amp; git push</code>
+         &nbsp;(GitHub allows it &mdash; it&rsquo;s under the 100&nbsp;MB per-file limit).</p>
+      <p><b>4.</b> For a file this large, host the site on <b>GitHub Pages</b>
+         (Settings &rarr; Pages &rarr; Deploy from a branch) &mdash; githack is
+         unreliable at 82&nbsp;MB. <code>GAME_URL</code> is already the local path,
+         so it just works.</p>
     </div>
 
-    <span class="pill">DROP YOUR BUILD HERE</span>
+    <span class="pill">REPLACE THIS FILE WITH YOUR BUILD</span>
   </div>
 </body>
 </html>

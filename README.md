@@ -43,19 +43,40 @@ https://raw.githack.com/lauraevan/mclauncherrep/claude/minecraft-launcher-replic
 ## The game (novix core 26.1.2)
 
 When **PLAY** is pressed the launcher loads the game into a full-screen
-`<iframe>`. The 82 MB build is hosted on catbox, so `GAME_URL` at the top of
-`js/launcher.js` points at it:
+`<iframe>` from a **local, bundled file**. `GAME_URL` at the top of
+`js/launcher.js` is the relative path:
 
 ```js
-var GAME_URL = "https://files.catbox.moe/olevzn.html";
+var GAME_URL = "game/index.html";
 ```
 
-- While the large file downloads, a **loading spinner** is shown; it hides once
-  the game finishes loading.
-- If the host ever sends a frame-blocking header, the **"Open in new tab"**
-  button in the game window opens the build directly instead.
-- To use a different build, just change `GAME_URL` (any HTTPS URL, or a local
-  `game/index.html`). Served over HTTPS on githack, so the target must be HTTPS.
+### Add your 82 MB build (do this on your machine)
+
+The build is too large to move through the hosted agent, so add it yourself:
+
+```bash
+git clone https://github.com/lauraevan/mclauncherrep
+cd mclauncherrep && git checkout claude/minecraft-launcher-replica-bakqq2
+cp /path/to/your/build.html game/index.html   # replace the placeholder
+git add game/index.html
+git commit -m "Add novix core 26.1.2 build"
+git push
+```
+
+82 MB is under GitHub's 100 MB per-file limit (you'll see a >50 MB warning — it
+still pushes). The game loads **same-origin**, so there's no CORS or
+frame-blocking to worry about.
+
+### Hosting a file this large
+
+- **GitHub Pages (recommended):** Settings → Pages → *Deploy from a branch* →
+  pick the branch → `/root`. Serves files up to ~100 MB reliably. The whole
+  launcher + game are then at `https://lauraevan.github.io/mclauncherrep/`.
+- **githack:** fine for the launcher shell, but a free proxy — an 82 MB file may
+  be slow or fail, so prefer Pages for the game.
+
+While the large file loads, the game window shows a **spinner**; there's also an
+**"Open in new tab"** button as a fallback.
 
 ## Real Minecraft "mail" (news & patch notes)
 
