@@ -1,6 +1,55 @@
 /* ============================================================
    launcher.js — UI behaviour for the Minecraft Launcher replica
    ============================================================ */
+
+/* ------------------------------------------------------------
+   BOOT / LOADING SCREEN
+   ------------------------------------------------------------
+   Full-screen splash shown while the site loads. One of the four
+   gameplay clips (assets/loading/load1..4.mp4) is picked at random
+   on every visit, so the background rotates each time you open the
+   launcher. Dismisses once the page has loaded and a short minimum
+   has elapsed, then fades out to reveal the launcher.
+   ------------------------------------------------------------ */
+(function () {
+  "use strict";
+  var loader = document.getElementById("bootLoader");
+  if (!loader) return;
+  var video = document.getElementById("bootVideo");
+  var counter = document.getElementById("bootCounter");
+
+  var pick = 1 + Math.floor(Math.random() * 4);
+  if (video) {
+    video.src = "assets/loading/load" + pick + ".mp4";
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {}); /* autoplay may defer; muted so it's allowed */
+  }
+
+  /* faint tick counter in the corner, like the real loader */
+  var n = Math.floor(1200 + Math.random() * 600);
+  var tick = setInterval(function () {
+    n += 7;
+    if (counter) counter.textContent = ("00000000" + n).slice(-8);
+  }, 45);
+
+  var MIN_MS = 3300, started = Date.now(), dismissed = false;
+  function dismiss() {
+    if (dismissed) return;
+    dismissed = true;
+    clearInterval(tick);
+    loader.classList.add("done");
+    setTimeout(function () {
+      if (video) { try { video.pause(); } catch (e) {} }
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 650);
+  }
+  function schedule() { setTimeout(dismiss, Math.max(0, MIN_MS - (Date.now() - started))); }
+  if (document.readyState === "complete") schedule();
+  else window.addEventListener("load", schedule);
+  /* hard safety net in case 'load' never fires */
+  setTimeout(dismiss, 9000);
+})();
+
 (function () {
   "use strict";
 
@@ -30,19 +79,13 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* ---------------- Tab switching (Java views) ---------------- */
-  function showTab(name) {
-    $$(".tab").forEach(function (t) { t.classList.toggle("active", t.dataset.tab === name); });
-    $$(".tab-panel").forEach(function (p) { p.classList.toggle("active", p.dataset.panel === name); });
-    if (name === "patch" && window.McNews) window.McNews.loadPatch();
-    var sa = $(".scroll-area"); if (sa) sa.scrollTop = 0;
-  }
+  /* ---------------- Per-game tabs + pages ---------------- */
+  var GAMES = {
+    java:     { label: "MINECRAFT: JAVA EDITION", tabs: [["play","Play"],["installations","Installations"],["realms","Realms"],["skins","Skins"],["patch","Patch Notes"]] },
+    legends:  { label: "MINECRAFT LEGENDS",       tabs: [["legends-play","Play"],["_faq","FAQ"],["_install","Installation"],["_patch","Patch Notes"]] },
+    dungeons: { label: "MINECRAFT DUNGEONS",      tabs: [["dungeons-play","Play"],["_dlc","DLC"],["_faq","FAQ"],["_install","Installation"],["_patch","Patch Notes"]] }
+  };
 
-  $$(".tab").forEach(function (t) {
-    t.addEventListener("click", function () { showTab(t.dataset.tab); });
-  });
-
-  /* ---------------- Sidebar view switching ---------------- */
   var tabsEl = $("#tabs");
   var scrollArea = $(".scroll-area");
   var genericView = null;
@@ -58,17 +101,46 @@
     return genericView;
   }
 
+  function showTab(id, label) {
+    $$(".tab").forEach(function (t) { t.classList.toggle("active", t.dataset.tab === id); });
+    var real = $('.tab-panel[data-panel="' + id + '"]');
+    $$(".tab-panel").forEach(function (p) { p.classList.remove("active"); });
+    if (real) {
+      if (genericView) genericView.style.display = "none";
+      real.classList.add("active");
+    } else {
+      var g = ensureGeneric();
+      g.style.display = "block";
+      g.innerHTML = '<h1>' + (label || "") + '</h1><p>This section is a placeholder in the replica.</p>';
+    }
+    if (id === "patch" && window.McNews) window.McNews.loadPatch();
+    if (scrollArea) scrollArea.scrollTop = 0;
+  }
+
+  function renderTabs(game) {
+    var conf = GAMES[game];
+    tabsEl.innerHTML = "";
+    conf.tabs.forEach(function (t, idx) {
+      var btn = document.createElement("button");
+      btn.className = "tab" + (idx === 0 ? " active" : "");
+      btn.type = "button"; btn.dataset.tab = t[0]; btn.textContent = t[1];
+      btn.addEventListener("click", function () { showTab(t[0], t[1]); });
+      tabsEl.appendChild(btn);
+    });
+  }
+
   function selectView(view) {
     $$("#primaryNav .nav-item, .nav-bottom .nav-item").forEach(function (n) {
       n.classList.toggle("active", n.dataset.view === view);
     });
     $("#contentLabel").textContent = LABELS[view] || "MINECRAFT";
 
-    if (view === "java") {
+    if (GAMES[view]) {
       tabsEl.style.visibility = "visible";
       $$(".tab-panel").forEach(function (p) { p.style.display = ""; });
       if (genericView) genericView.style.display = "none";
-      showTab("play");
+      renderTabs(view);
+      showTab(GAMES[view].tabs[0][0], GAMES[view].tabs[0][1]);
     } else {
       tabsEl.style.visibility = "hidden";
       $$(".tab-panel").forEach(function (p) { p.classList.remove("active"); p.style.display = "none"; });
@@ -77,10 +149,12 @@
       g.innerHTML =
         '<h1>' + (LABELS[view] || "Minecraft") + '</h1>' +
         '<p>This section is a placeholder in the replica.<br>' +
-        'The <b>Minecraft: Java Edition</b> tab is the fully built, playable one &mdash; select it to play.</p>';
+        'The built-out pages are <b>Java Edition</b>, <b>Legends</b>, and <b>Dungeons</b>.</p>';
       scrollArea.scrollTop = 0;
     }
   }
+
+  renderTabs("java"); /* wire up the initial (Java) tabs */
 
   $$("#primaryNav .nav-item, .nav-bottom .nav-item").forEach(function (n) {
     n.addEventListener("click", function () { selectView(n.dataset.view); });

@@ -9,6 +9,19 @@
   <link rel="stylesheet" href="css/launcher.css" />
 </head>
 <body>
+  <!-- ============ BOOT / LOADING SCREEN ============ -->
+  <div class="boot-loader" id="bootLoader">
+    <div class="boot-frame">
+      <video class="boot-video" id="bootVideo" muted playsinline autoplay loop preload="auto"></video>
+      <span class="boot-corner tl"></span>
+      <span class="boot-corner tr"></span>
+      <span class="boot-corner bl"></span>
+      <span class="boot-corner br"></span>
+    </div>
+    <div class="boot-caption"><span class="boot-word">LOADING</span><span class="boot-dots"><i></i><i></i><i></i></span></div>
+    <div class="boot-counter" id="bootCounter">00000000</div>
+  </div>
+
   <div class="launcher" id="launcher">
 
     <!-- ============ SIDEBAR ============ -->
@@ -210,6 +223,60 @@
             <div class="skin-card"><div class="skin-body alex"></div><span>Alex</span></div>
             <div class="skin-card add"><div class="skin-plus">+</div><span>Add skin</span></div>
           </div>
+        </section>
+
+        <!-- ---- MINECRAFT LEGENDS (install page) ---- -->
+        <section class="tab-panel install-page" data-panel="legends-play" data-theme="legends">
+          <div class="hero install-hero">
+            <div class="hero-clip"><img class="hero-img" src="assets/legends-hero.webp" alt="Minecraft Legends" /></div>
+            <button class="hero-media" type="button" aria-label="Preview">
+              <svg viewBox="0 0 24 24" width="9" height="9"><path d="M8 6l9 6-9 6z" fill="currentColor"/></svg>
+            </button>
+            <div class="gift-ad2">
+              <div class="ga-box">
+                <span class="ga-text">Give the gift of Legends and play together with your friends!</span>
+                <span class="ga-div"></span>
+                <button class="ga-x" type="button" aria-label="Dismiss">&times;</button>
+              </div>
+              <button class="ga-buy" type="button">Buy as Gift <span>&#127873;</span></button>
+            </div>
+          </div>
+          <div class="install-controls">
+            <button class="install-btn" type="button">INSTALL</button>
+            <img class="gamepass-img install-gp" src="assets/ui/gamepass.png" alt="Included with PC GAME PASS" />
+          </div>
+          <section class="news-row">
+            <div class="news-card skeleton"></div>
+            <div class="news-card skeleton"></div>
+            <div class="news-card skeleton"></div>
+          </section>
+        </section>
+
+        <!-- ---- MINECRAFT DUNGEONS (install page) ---- -->
+        <section class="tab-panel install-page" data-panel="dungeons-play" data-theme="dungeons">
+          <div class="hero install-hero">
+            <div class="hero-clip"><img class="hero-img" src="assets/dungeons-hero.webp" alt="Minecraft Dungeons" /></div>
+            <button class="hero-media" type="button" aria-label="Preview">
+              <svg viewBox="0 0 24 24" width="9" height="9"><path d="M8 6l9 6-9 6z" fill="currentColor"/></svg>
+            </button>
+            <div class="gift-ad2">
+              <div class="ga-box">
+                <span class="ga-text">Give the gift of Dungeons and play together with your friends!</span>
+                <span class="ga-div"></span>
+                <button class="ga-x" type="button" aria-label="Dismiss">&times;</button>
+              </div>
+              <button class="ga-buy" type="button">Buy as Gift <span>&#127873;</span></button>
+            </div>
+          </div>
+          <div class="install-controls">
+            <button class="install-btn" type="button">INSTALL</button>
+            <img class="gamepass-img install-gp" src="assets/ui/gamepass.png" alt="Included with PC GAME PASS" />
+          </div>
+          <section class="news-row">
+            <div class="news-card skeleton"></div>
+            <div class="news-card skeleton"></div>
+            <div class="news-card skeleton"></div>
+          </section>
         </section>
 
       </div>

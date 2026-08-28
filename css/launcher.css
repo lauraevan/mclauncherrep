@@ -157,6 +157,30 @@ img{display:block;max-width:100%}
 .news-card.skeleton{background:linear-gradient(100deg,#201c19,#2a2521,#201c19);background-size:200% 100%;animation:shimmer 1.4s infinite}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
+/* ===================== INSTALL PAGES (Legends / Dungeons) ===================== */
+.install-page[data-theme="legends"]{--ins-a:#5cd8ff;--ins-b:#1fb4e2;--ins-txt:#04143f;--gift-bg:#0a57de}
+.install-page[data-theme="dungeons"]{--ins-a:#ffc555;--ins-b:#f3970d;--ins-txt:#3a2205;--gift-bg:#f4791a}
+.install-hero{height:422px}
+.install-hero .hero-img{width:100%;height:100%;object-fit:cover;object-position:center 44%}
+.install-hero .hero-media{left:16px;bottom:48px}
+
+.gift-ad2{position:absolute;right:8px;bottom:34px;display:flex;align-items:stretch;gap:6px;height:38px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.gift-ad2 .ga-box{background:var(--gift-bg);display:flex;align-items:center;gap:9px;padding:4px 9px 4px 12px;border-radius:2px}
+.gift-ad2 .ga-text{font-family:'Pixelify Sans',sans-serif;font-size:11px;line-height:1.16;color:#fff;max-width:212px}
+.gift-ad2 .ga-div{width:1px;align-self:stretch;background:rgba(255,255,255,.4);margin:5px 0}
+.gift-ad2 .ga-x{background:none;border:none;color:#fff;cursor:pointer;font-size:15px;line-height:1;padding:0 2px}
+.gift-ad2 .ga-buy{background:#514d4c;color:#fff;border:none;cursor:pointer;border-radius:2px;padding:0 11px;font-family:'Pixelify Sans',sans-serif;font-size:11px;display:flex;align-items:center;gap:5px}
+.gift-ad2 .ga-buy:hover{background:#5f5b59}
+
+.install-controls{position:relative;height:50px;background:var(--content-bg)}
+.install-btn{position:absolute;left:50%;top:-48px;transform:translateX(-50%);width:214px;height:50px;cursor:pointer;border:none;border-radius:4px;
+  font-family:'Pixelify Sans',sans-serif;font-weight:700;font-size:21px;letter-spacing:1.5px;color:var(--ins-txt);
+  background:linear-gradient(180deg,var(--ins-a),var(--ins-b));
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.45), inset 0 -3px 0 rgba(0,0,0,.16), 0 2px 4px rgba(0,0,0,.4)}
+.install-btn:hover{filter:brightness(1.05)}
+.install-btn:active{transform:translateX(-50%) translateY(1px)}
+.install-controls .install-gp{position:absolute;left:50%;top:20px;transform:translateX(-50%);width:206px;height:auto}
+
 /* ===================== OTHER PANELS ===================== */
 .panel-title{font-size:22px;font-weight:800;padding:20px 20px 10px}
 .patch-list{padding:0 20px 28px;display:flex;flex-direction:column;gap:12px}
@@ -215,6 +239,38 @@ img{display:block;max-width:100%}
 .gl-text{font-size:15px;font-weight:600;text-align:center;line-height:1.5}
 .gl-text span{display:block;font-size:12px;font-weight:400;color:#8f8a86;margin-top:4px}
 
+/* ===================== BOOT / LOADING SCREEN ===================== */
+.boot-loader{position:fixed;inset:0;z-index:12000;background:#000;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;opacity:1;transition:opacity .55s ease}
+.boot-loader.done{opacity:0;pointer-events:none}
+.boot-frame{position:relative;width:min(49.6vw,760px);aspect-ratio:16 / 9;background:#05070a;
+  border:3px solid #33c2f3;
+  box-shadow:0 0 0 1px rgba(51,194,243,.30), 0 0 20px 3px rgba(51,194,243,.34), inset 0 0 12px rgba(51,194,243,.16);}
+.boot-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#05070a}
+/* reinforced pixel corner brackets */
+.boot-corner{position:absolute;width:22px;height:22px;pointer-events:none}
+.boot-corner.tl{top:-3px;left:-3px;border-top:5px solid #74e2ff;border-left:5px solid #74e2ff}
+.boot-corner.tr{top:-3px;right:-3px;border-top:5px solid #74e2ff;border-right:5px solid #74e2ff}
+.boot-corner.bl{bottom:-3px;left:-3px;border-bottom:5px solid #74e2ff;border-left:5px solid #74e2ff}
+.boot-corner.br{bottom:-3px;right:-3px;border-bottom:5px solid #74e2ff;border-right:5px solid #74e2ff}
+.boot-corner::after{content:"";position:absolute;width:5px;height:5px;background:#74e2ff}
+.boot-corner.tl::after{top:9px;left:9px}
+.boot-corner.tr::after{top:9px;right:9px}
+.boot-corner.bl::after{bottom:9px;left:9px}
+.boot-corner.br::after{bottom:9px;right:9px}
+.boot-caption{margin-top:clamp(32px,5.9vh,64px);display:flex;align-items:flex-end;
+  font-family:'Silkscreen','Press Start 2P',monospace;font-weight:700;line-height:1}
+.boot-word{color:#0c5ff2;font-size:clamp(22px,3.4vw,44px);letter-spacing:.01em;
+  text-shadow:0 3px 0 rgba(0,0,0,.30)}
+.boot-dots{display:inline-flex;gap:.28em;margin-left:.5em;padding-bottom:.14em}
+.boot-dots i{width:.46em;height:.46em;background:#0a1530;font-size:clamp(22px,3.4vw,44px);
+  animation:bootdot 1.35s steps(1,end) infinite}
+.boot-dots i:nth-child(2){animation-delay:.28s}
+.boot-dots i:nth-child(3){animation-delay:.56s}
+@keyframes bootdot{0%,60%,100%{background:#0a1530}20%,55%{background:#0c5ff2}}
+.boot-counter{position:fixed;left:10px;bottom:6px;font-family:'Silkscreen',monospace;
+  font-size:12px;letter-spacing:.08em;color:rgba(140,168,196,.28);user-select:none}
+
 /* ===================== RESPONSIVE ===================== */
 /* tablet: drop the promo overlays and let the hero art use the full width */
 @media (max-width:900px){
@@ -256,4 +312,8 @@ img{display:block;max-width:100%}
 @media (max-width:400px){
   .play-btn{width:82vw}
   .content-label{font-size:10px}
+}
+@media (max-width:768px){
+  .boot-frame{width:min(86vw,560px)}
+  .boot-word,.boot-dots i{font-size:clamp(18px,7vw,34px)}
 }
