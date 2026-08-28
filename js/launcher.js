@@ -137,10 +137,25 @@
     });
   }
 
+  var contentHead = $(".content-head");
+
   function selectView(view) {
     $$("#primaryNav .nav-item, .nav-bottom .nav-item").forEach(function (n) {
       n.classList.toggle("active", n.dataset.view === view);
     });
+
+    /* HOME: swap the header for the quick-launch toolbar, show the home panel */
+    if (view === "home") {
+      contentHead.classList.add("head-home");
+      tabsEl.style.visibility = "hidden";
+      $$(".tab-panel").forEach(function (p) { p.classList.remove("active"); p.style.display = "none"; });
+      if (genericView) genericView.style.display = "none";
+      var home = $('.tab-panel[data-panel="home"]');
+      if (home) { home.style.display = "block"; home.classList.add("active"); }
+      scrollArea.scrollTop = 0;
+      return;
+    }
+    contentHead.classList.remove("head-home");
     $("#contentLabel").textContent = (PAGES[view] && PAGES[view].label) || LABELS[view] || "MINECRAFT";
 
     if (PAGES[view]) {
@@ -208,6 +223,8 @@
   });
 
   if (playBtn) playBtn.addEventListener("click", launchGame);
+  var homePlayBtn = $("#homePlayBtn");
+  if (homePlayBtn) homePlayBtn.addEventListener("click", launchGame);
   $("#gameBack").addEventListener("click", closeGame);
   var newtab = $("#gameNewtab");
   if (newtab) newtab.addEventListener("click", function () { window.open(GAME_URL, "_blank", "noopener"); });
