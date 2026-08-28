@@ -124,3 +124,28 @@
 
   document.addEventListener("DOMContentLoaded", loadNews);
 })();
+
+/* The screenshot-matching pages are isolated in their own files so the core
+   launcher and its loading screen stay untouched while Claude and ChatGPT
+   iterate on the replica together. */
+(function () {
+  "use strict";
+  function loadReferencePages() {
+    if (!document.querySelector('link[data-reference-pages]')) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'css/reference-pages.css';
+      css.setAttribute('data-reference-pages', '');
+      document.head.appendChild(css);
+    }
+    if (!document.querySelector('script[data-reference-pages]')) {
+      var js = document.createElement('script');
+      js.src = 'js/reference-pages.js';
+      js.defer = true;
+      js.setAttribute('data-reference-pages', '');
+      document.body.appendChild(js);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadReferencePages);
+  else loadReferencePages();
+})();
