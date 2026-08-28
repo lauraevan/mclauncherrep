@@ -74,6 +74,8 @@ img{display:block;max-width:100%}
 .tab:hover{color:#fff}
 .tab.active{color:#fff}
 .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;background:#fff;border-radius:1px}
+/* settings uses a green tab underline */
+.tabs-green .tab.active::after{background:var(--green)}
 
 .scroll-area{flex:1;overflow-y:auto;overflow-x:hidden}
 .scroll-area::-webkit-scrollbar{width:9px}
@@ -174,7 +176,7 @@ img{display:block;max-width:100%}
 
 .install-controls{position:relative;height:50px;background:var(--content-bg)}
 .install-btn{position:absolute;left:50%;top:-48px;transform:translateX(-50%);width:214px;height:50px;cursor:pointer;border:none;border-radius:4px;
-  font-family:'Pixelify Sans',sans-serif;font-weight:700;font-size:21px;letter-spacing:1.5px;color:var(--ins-txt);
+  font-family:'Minecraft','Pixelify Sans',sans-serif;font-weight:400;font-size:18px;letter-spacing:1px;color:var(--ins-txt);
   background:linear-gradient(180deg,var(--ins-a),var(--ins-b));
   box-shadow:inset 0 2px 0 rgba(255,255,255,.45), inset 0 -3px 0 rgba(0,0,0,.16), 0 2px 4px rgba(0,0,0,.4)}
 .install-btn:hover{filter:brightness(1.05)}
@@ -270,6 +272,47 @@ img{display:block;max-width:100%}
 @keyframes bootdot{0%,60%,100%{background:#0a1530}20%,55%{background:#0c5ff2}}
 .boot-counter{position:fixed;left:10px;bottom:6px;font-family:'Silkscreen',monospace;
   font-size:12px;letter-spacing:.08em;color:rgba(140,168,196,.28);user-select:none}
+
+/* ===================== DUNGEONS II (pre-order) ===================== */
+.d2-hero{height:430px}
+.d2-hero .hero-img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.d2-media{position:absolute;left:14px;bottom:14px;display:flex;gap:8px;z-index:4}
+.d2-mbtn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  background:rgba(18,20,24,.74);border:none;border-radius:3px;color:#e9e9ec;cursor:pointer}
+.d2-mbtn:hover{background:rgba(40,44,50,.88)}
+.d2-controls{position:relative;height:58px;background:var(--content-bg)}
+.preorder-btn{position:absolute;left:50%;top:-43px;transform:translateX(-50%);
+  width:236px;height:62px;cursor:pointer;border:none;border-radius:4px;z-index:2;
+  font-family:'Minecraft','Pixelify Sans',sans-serif;font-size:18px;letter-spacing:1px;color:#3a2205;
+  background:linear-gradient(180deg,#ffc248 0%,#f6a01a 55%,#ef8c0b 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.5), inset 0 -3px 0 rgba(0,0,0,.18), 0 3px 5px rgba(0,0,0,.45)}
+.preorder-btn:active{transform:translateX(-50%) translateY(1px)}
+.d2-gp{position:absolute;left:50%;top:30px;transform:translateX(-50%);width:206px;height:auto}
+.d2-ghost{position:absolute;left:50%;top:20px;transform:translateX(-50%);width:30px;pointer-events:none;z-index:1}
+.d2-ghost-string{position:absolute;left:50%;top:0;width:1px;height:34px;background:rgba(255,255,255,.45);transform:translateX(-50%)}
+.d2-ghost-body{position:absolute;top:30px;left:50%;transform:translateX(-50%)}
+.d2-promo{background:linear-gradient(180deg,#02102e 0%,#0a3a5c 100%);min-height:150px;padding:26px 40px 40px}
+.d2-promo-title{font-family:'Minecraft','Press Start 2P',sans-serif;color:#fff;font-weight:400;
+  font-size:33px;line-height:1.5;letter-spacing:1px;text-shadow:0 3px 0 rgba(0,0,0,.32)}
+
+/* ===================== SETTINGS ===================== */
+.settings-page{background:var(--content-bg);min-height:100%}
+.set-wrap{padding:24px 40px 60px;max-width:760px}
+.set-label{font-size:11px;font-weight:700;letter-spacing:.5px;color:#dcd8d4;text-transform:uppercase;margin-bottom:9px}
+.set-select{display:flex;align-items:center;justify-content:space-between;width:348px;height:40px;
+  background:#201d1b;border:1px solid #4a4542;border-radius:2px;color:#eae7e4;font-size:13.5px;
+  padding:0 10px;cursor:pointer;font-family:inherit}
+.set-select svg{color:#b9b4b0;flex:0 0 auto}
+.set-review-row{display:flex;align-items:center;gap:14px;margin:26px 0 4px}
+.set-review{background:#3a3633;color:#e7e4e1;border:none;border-radius:2px;padding:9px 15px;font-size:13px;cursor:pointer;
+  box-shadow:inset -2px -2px 0 rgba(0,0,0,.3), inset 2px 2px 0 rgba(255,255,255,.12);font-family:inherit}
+.set-creeper{width:34px;height:34px;object-fit:contain;image-rendering:pixelated}
+.set-section{font-size:11px;font-weight:700;letter-spacing:.5px;color:#dcd8d4;text-transform:uppercase;margin:26px 0 12px}
+.set-check{display:flex;align-items:center;gap:11px;font-size:13.5px;color:#e6e3e0;margin:12px 0;cursor:pointer;line-height:1.3}
+.set-check input{position:absolute;opacity:0;width:0;height:0}
+.set-check .box{width:18px;height:18px;flex:0 0 18px;border:1.5px solid #6f6a66;border-radius:2px;background:#201d1b;position:relative}
+.set-check input:checked + .box{background:var(--green);border-color:var(--green)}
+.set-check input:checked + .box::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
 
 /* ===================== RESPONSIVE ===================== */
 /* tablet: drop the promo overlays and let the hero art use the full width */

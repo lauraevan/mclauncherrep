@@ -21,8 +21,13 @@
   var pick = 1 + Math.floor(Math.random() * 4);
   if (video) {
     video.src = "assets/loading/load" + pick + ".mp4";
-    var p = video.play();
-    if (p && p.catch) p.catch(function () {}); /* autoplay may defer; muted so it's allowed */
+    video.muted = true;            /* muted autoplay is always allowed */
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    var tryPlay = function () { var p = video.play(); if (p && p.catch) p.catch(function () {}); };
+    tryPlay();
+    video.addEventListener("loadeddata", tryPlay, { once: true });
+    video.addEventListener("canplay", tryPlay, { once: true });
   }
 
   /* faint tick counter in the corner, like the real loader */
@@ -32,7 +37,7 @@
     if (counter) counter.textContent = ("00000000" + n).slice(-8);
   }, 45);
 
-  var MIN_MS = 3300, started = Date.now(), dismissed = false;
+  var MIN_MS = 6500, started = Date.now(), dismissed = false;
   function dismiss() {
     if (dismissed) return;
     dismissed = true;
@@ -47,7 +52,7 @@
   if (document.readyState === "complete") schedule();
   else window.addEventListener("load", schedule);
   /* hard safety net in case 'load' never fires */
-  setTimeout(dismiss, 9000);
+  setTimeout(dismiss, 12000);
 })();
 
 (function () {
@@ -79,11 +84,13 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* ---------------- Per-game tabs + pages ---------------- */
-  var GAMES = {
-    java:     { label: "MINECRAFT: JAVA EDITION", tabs: [["play","Play"],["installations","Installations"],["realms","Realms"],["skins","Skins"],["patch","Patch Notes"]] },
-    legends:  { label: "MINECRAFT LEGENDS",       tabs: [["legends-play","Play"],["_faq","FAQ"],["_install","Installation"],["_patch","Patch Notes"]] },
-    dungeons: { label: "MINECRAFT DUNGEONS",      tabs: [["dungeons-play","Play"],["_dlc","DLC"],["_faq","FAQ"],["_install","Installation"],["_patch","Patch Notes"]] }
+  /* ---------------- Per-view tabs + pages ---------------- */
+  var PAGES = {
+    java:      { label: "MINECRAFT: JAVA EDITION", tabs: [["play","Play"],["installations","Installations"],["realms","Realms"],["skins","Skins"],["patch","Patch Notes"]] },
+    legends:   { label: "MINECRAFT LEGENDS",       tabs: [["legends-play","Play"],["_faq","FAQ"],["_install","Installation"],["_patch","Patch Notes"]] },
+    dungeons:  { label: "MINECRAFT DUNGEONS",      tabs: [["dungeons-play","Play"],["_dlc","DLC"],["_faq","FAQ"],["_install","Installation"],["_patch","Patch Notes"]] },
+    dungeons2: { label: "MINECRAFT DUNGEONS II",   tabs: [["dungeons2-play","Play"]] },
+    settings:  { label: "SETTINGS", accent: "green", tabs: [["settings","General"],["_accounts","Accounts"],["_about","About"]] }
   };
 
   var tabsEl = $("#tabs");
@@ -117,8 +124,9 @@
     if (scrollArea) scrollArea.scrollTop = 0;
   }
 
-  function renderTabs(game) {
-    var conf = GAMES[game];
+  function renderTabs(view) {
+    var conf = PAGES[view];
+    tabsEl.classList.toggle("tabs-green", conf.accent === "green");
     tabsEl.innerHTML = "";
     conf.tabs.forEach(function (t, idx) {
       var btn = document.createElement("button");
@@ -133,14 +141,14 @@
     $$("#primaryNav .nav-item, .nav-bottom .nav-item").forEach(function (n) {
       n.classList.toggle("active", n.dataset.view === view);
     });
-    $("#contentLabel").textContent = LABELS[view] || "MINECRAFT";
+    $("#contentLabel").textContent = (PAGES[view] && PAGES[view].label) || LABELS[view] || "MINECRAFT";
 
-    if (GAMES[view]) {
+    if (PAGES[view]) {
       tabsEl.style.visibility = "visible";
       $$(".tab-panel").forEach(function (p) { p.style.display = ""; });
       if (genericView) genericView.style.display = "none";
       renderTabs(view);
-      showTab(GAMES[view].tabs[0][0], GAMES[view].tabs[0][1]);
+      showTab(PAGES[view].tabs[0][0], PAGES[view].tabs[0][1]);
     } else {
       tabsEl.style.visibility = "hidden";
       $$(".tab-panel").forEach(function (p) { p.classList.remove("active"); p.style.display = "none"; });
@@ -149,7 +157,7 @@
       g.innerHTML =
         '<h1>' + (LABELS[view] || "Minecraft") + '</h1>' +
         '<p>This section is a placeholder in the replica.<br>' +
-        'The built-out pages are <b>Java Edition</b>, <b>Legends</b>, and <b>Dungeons</b>.</p>';
+        'The built-out pages are <b>Java Edition</b>, <b>Dungeons II</b>, <b>Dungeons</b>, <b>Legends</b> and <b>Settings</b>.</p>';
       scrollArea.scrollTop = 0;
     }
   }
