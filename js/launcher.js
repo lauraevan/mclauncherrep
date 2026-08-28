@@ -222,7 +222,38 @@
     if (frame.src && frame.src.indexOf("about:blank") === -1 && gameLoading) gameLoading.style.display = "none";
   });
 
-  if (playBtn) playBtn.addEventListener("click", launchGame);
+  /* PLAY -> preparing / downloading / launching -> game */
+  var playBar = $(".play-bar");
+  var playStatus = $("#playStatus");
+  var playBusy = false;
+  function runPlaySequence() {
+    if (playBusy) return;
+    if (!playBar || !playStatus) { launchGame(); return; }
+    playBusy = true;
+    var label = playStatus.querySelector(".ps-label");
+    var pct = playStatus.querySelector(".ps-pct");
+    var fill = playStatus.querySelector(".ps-bar");
+    playBar.classList.add("busy");
+    label.textContent = "PREPARING…"; pct.textContent = ""; fill.style.width = "0";
+    setTimeout(function () {
+      label.textContent = "DOWNLOADING";
+      var p = 0;
+      var iv = setInterval(function () {
+        p += Math.random() * 17 + 9; if (p > 100) p = 100;
+        fill.style.width = p + "%"; pct.textContent = Math.floor(p) + "%";
+        if (p >= 100) {
+          clearInterval(iv);
+          setTimeout(function () {
+            label.textContent = "LAUNCHING…"; pct.textContent = "";
+            setTimeout(function () {
+              playBar.classList.remove("busy"); playBusy = false; launchGame();
+            }, 650);
+          }, 240);
+        }
+      }, 175);
+    }, 520);
+  }
+  if (playBtn) playBtn.addEventListener("click", runPlaySequence);
   var homePlayBtn = $("#homePlayBtn");
   if (homePlayBtn) homePlayBtn.addEventListener("click", launchGame);
   $("#gameBack").addEventListener("click", closeGame);
@@ -235,16 +266,106 @@
 
   /* ---------------- Small niceties ---------------- */
   var copyBtn = $(".copy-btn");
-  if (copyBtn) copyBtn.addEventListener("click", function () {
+  if (copyBtn) copyBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
     var name = "EvanEnderDragon1";
     if (navigator.clipboard) navigator.clipboard.writeText(name).catch(function () {});
+    copyBtn.classList.add("copied");
     copyBtn.title = "Copied!";
-    setTimeout(function () { copyBtn.title = "Copy username"; }, 1200);
+    setTimeout(function () { copyBtn.classList.remove("copied"); copyBtn.title = "Copy username"; }, 1100);
   });
 
   var giftClose = $(".gift-close");
   if (giftClose) giftClose.addEventListener("click", function () {
     var a = $("#giftAd"); if (a) a.style.display = "none";
   });
+
+  /* ---------------- Popup menus (account / version / quick play / kebab) ---------------- */
+  var openAnchor = null;
+  function closeMenus() { $$(".mc-menu").forEach(function (m) { m.parentNode && m.parentNode.removeChild(m); }); openAnchor = null; }
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".mc-menu") && !e.target.closest("[data-menu]")) closeMenus();
+  });
+  function openMenu(anchor, items, opts) {
+    if (openAnchor === anchor) { closeMenus(); return; } /* toggle off */
+    closeMenus();
+    opts = opts || {};
+    var m = document.createElement("div");
+    m.className = "mc-menu";
+    items.forEach(function (it) {
+      if (it.sep) { var s = document.createElement("div"); s.className = "mc-sep"; m.appendChild(s); return; }
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "mc-mi" + (it.active ? " active" : "");
+      b.textContent = it.label;
+      b.addEventListener("click", function () { closeMenus(); if (it.onClick) it.onClick(); });
+      m.appendChild(b);
+    });
+    document.body.appendChild(m);
+    var r = anchor.getBoundingClientRect();
+    var mw = m.offsetWidth, mh = m.offsetHeight;
+    var left = opts.right ? r.right - mw : r.left;
+    var top = opts.above ? r.top - mh - 4 : r.bottom + 4;
+    left = Math.max(6, Math.min(left, window.innerWidth - mw - 6));
+    top = Math.max(6, Math.min(top, window.innerHeight - mh - 6));
+    m.style.left = left + "px"; m.style.top = top + "px";
+    openAnchor = anchor;
+  }
+
+  var accountBtn = $(".account");
+  if (accountBtn) {
+    accountBtn.setAttribute("data-menu", "account");
+    accountBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      openMenu(accountBtn, [
+        { label: "EvanEnderDragon1", onClick: function () {} },
+        { sep: true },
+        { label: "Manage account", onClick: function () { window.open("https://account.microsoft.com", "_blank", "noopener"); } },
+        { label: "Switch account", onClick: function () {} },
+        { label: "Sign out", onClick: function () {} }
+      ]);
+    });
+  }
+  var versionSelect = $(".version-select");
+  if (versionSelect) {
+    versionSelect.setAttribute("data-menu", "version");
+    versionSelect.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var name = versionSelect.querySelector(".vs-name");
+      var sub = versionSelect.querySelector(".vs-sub");
+      function pick(n, s) { return function () { if (name) name.textContent = n; if (sub) sub.textContent = s; }; }
+      openMenu(versionSelect, [
+        { label: "fabric-loader-1.21.4", active: true, onClick: pick("fabric-loader-1.21.4", "fabric-loader-0.19.2-1.21.4") },
+        { label: "Latest release (1.21.4)", onClick: pick("Latest release", "1.21.4") },
+        { label: "Latest snapshot (25w02a)", onClick: pick("Latest snapshot", "25w02a") },
+        { sep: true },
+        { label: "Installations…", onClick: function () { selectView("java"); showTab("installations", "Installations"); } }
+      ], { above: true });
+    });
+  }
+  var quickPlay = $("#quickPlay");
+  if (quickPlay) {
+    quickPlay.setAttribute("data-menu", "quick");
+    quickPlay.addEventListener("click", function (e) {
+      e.stopPropagation();
+      openMenu(quickPlay, [
+        { label: "Quick Play latest world", onClick: runPlaySequence },
+        { label: "Quick Play latest server", onClick: runPlaySequence }
+      ], { above: true });
+    });
+  }
+  var playKebab = $("#playKebab");
+  if (playKebab) {
+    playKebab.setAttribute("data-menu", "kebab");
+    playKebab.addEventListener("click", function (e) {
+      e.stopPropagation();
+      openMenu(playKebab, [
+        { label: "Open game directory", onClick: function () {} },
+        { label: "Manage installation", onClick: function () { selectView("java"); showTab("installations", "Installations"); } },
+        { label: "Duplicate", onClick: function () {} }
+      ], { above: true, right: true });
+    });
+  }
+  var heroTrailer = $(".hero-trailer");
+  if (heroTrailer) heroTrailer.addEventListener("click", launchGame);
 
 })();

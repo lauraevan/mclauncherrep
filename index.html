@@ -27,7 +27,7 @@
     <!-- ============ SIDEBAR ============ -->
     <aside class="sidebar">
       <button class="account" type="button" title="Microsoft account">
-        <img class="account-avatar" src="assets/icons/avatar.png" alt="" />
+        <img class="account-avatar" src="assets/icons/ref-avatar.png" alt="" />
         <span class="account-text">
           <span class="account-name">EvanEnderD&#8230;</span>
           <span class="account-sub">Microsoft account</span>
@@ -45,27 +45,27 @@
         </button>
 
         <button class="nav-item active" data-view="java" type="button">
-          <span class="nav-ico"><img class="ico-java" src="assets/icons/java.webp" alt="" /></span>
+          <span class="nav-ico"><img class="ico-tile" src="assets/icons/ref-java.png" alt="" /></span>
           <span class="nav-label">Minecraft:<br>Java Edition</span>
         </button>
 
         <button class="nav-item" data-view="bedrock" type="button">
-          <span class="nav-ico"><img src="assets/icons/bedrock.png" alt="" /></span>
+          <span class="nav-ico"><img class="ico-tile" src="assets/icons/ref-bedrock.png" alt="" /></span>
           <span class="nav-label">Minecraft:<br>Bedrock Edition</span>
         </button>
 
         <button class="nav-item" data-view="dungeons2" type="button">
-          <span class="nav-ico"><img src="assets/icons/dungeons2.webp" alt="" /></span>
+          <span class="nav-ico"><img class="ico-tile" src="assets/icons/ref-dungeons2.png" alt="" /></span>
           <span class="nav-label">Minecraft<br>Dungeons II</span>
         </button>
 
         <button class="nav-item" data-view="dungeons" type="button">
-          <span class="nav-ico"><img src="assets/icons/dungeons.webp" alt="" /></span>
+          <span class="nav-ico"><img class="ico-tile" src="assets/icons/ref-dungeons.png" alt="" /></span>
           <span class="nav-label">Minecraft<br>Dungeons</span>
         </button>
 
         <button class="nav-item" data-view="legends" type="button">
-          <span class="nav-ico"><img src="assets/icons/legends.png" alt="" /></span>
+          <span class="nav-ico"><img class="ico-tile" src="assets/icons/ref-legends.png" alt="" /></span>
           <span class="nav-label">Minecraft<br>Legends</span>
         </button>
       </nav>
@@ -78,6 +78,7 @@
             <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="5" width="14" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M17 9h3v8a2 2 0 0 1-2 2h-1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 9h8M6 12h8M6 15h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </span>
           <span class="nav-label">What's New</span>
+          <span class="dot"></span>
         </button>
         <button class="nav-item small" data-view="settings" type="button">
           <span class="nav-ico">
@@ -186,6 +187,10 @@
               <img src="assets/ui/gift.png" alt="Give the gift of Minecraft and play together with your friends! Buy as Gift" />
               <button class="gift-close" type="button" aria-label="Dismiss"></button>
             </div>
+
+            <button class="hero-trailer" type="button" aria-label="Watch trailer">
+              <svg viewBox="0 0 24 24" width="12" height="12"><path d="M8 5.5l10 6.5-10 6.5z" fill="currentColor"/></svg>
+            </button>
           </div>
 
           <div class="play-bar">
@@ -201,15 +206,16 @@
             <button class="play-btn" id="playBtn" type="button" aria-label="Play">
               <img src="assets/ui/play-button.png" alt="PLAY" />
             </button>
-
-            <div class="server-stack" title="Open installations folder">
-              <svg viewBox="0 0 44 68" width="40" height="61">
-                <g><polygon points="22,2 42,12 22,22 2,12" fill="#7cbf3f"/><polygon points="2,12 22,22 22,31 2,21" fill="#4f8b2c"/><polygon points="42,12 22,22 22,31 42,21" fill="#3d711f"/></g>
-                <g transform="translate(0,21)"><polygon points="22,2 42,12 22,22 2,12" fill="#71b23a"/><polygon points="2,12 22,22 22,31 2,21" fill="#4c8629"/><polygon points="42,12 22,22 22,31 42,21" fill="#3a6d1d"/></g>
-                <g transform="translate(0,42)"><polygon points="22,2 42,12 22,22 2,12" fill="#68a834"/><polygon points="2,12 22,22 22,26 2,16" fill="#4c8629"/><polygon points="42,12 22,22 22,26 42,16" fill="#3a6d1d"/></g>
-              </svg>
+            <div class="play-status" id="playStatus" aria-live="polite">
+              <span class="ps-label">PREPARING&#8230;</span>
+              <span class="ps-pct"></span>
+              <span class="ps-bar"></span>
             </div>
-            <button class="kebab" type="button" title="More options">
+
+            <button class="quick-play" id="quickPlay" type="button" title="Quick Play">
+              <img src="assets/icons/ref-quickplay.png" alt="Quick Play" />
+            </button>
+            <button class="kebab" id="playKebab" type="button" title="More options">
               <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="5" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="19" r="1.7" fill="currentColor"/></svg>
             </button>
 

@@ -2,13 +2,13 @@
    Minecraft Launcher replica — measured pixel-match @1160x647
    ============================================================ */
 :root{
-  --sidebar-bg:#332f2c;
+  --sidebar-bg:#312d2c;
   --sidebar-w:159px;
-  --content-bg:#191512;
-  --head-bg:#221e1a;
-  --panel:#231f1c;
-  --nav-active:#423e3b;
-  --divider:rgba(0,0,0,.30);
+  --content-bg:#171614;
+  --head-bg:#252422;
+  --panel:#201d1b;
+  --nav-active:#252422;
+  --divider:rgba(0,0,0,.32);
   --text:#ece9e6;
   --text-dim:#b3ada9;
   --text-faint:#736d68;
@@ -31,46 +31,46 @@ img{display:block;max-width:100%}
   padding:0;border-right:1px solid #000;
 }
 .account{
-  display:flex;align-items:flex-start;gap:8px;background:none;border:none;color:var(--text);
-  cursor:pointer;padding:12px 8px 18px 9px;text-align:left;width:100%;
+  position:relative;display:flex;align-items:center;gap:9px;background:none;border:none;color:var(--text);
+  cursor:pointer;height:60px;padding:0 10px;text-align:left;width:100%;
   border-bottom:1px solid var(--divider);
 }
-.account:hover{background:#3b3734}
-.account-avatar{width:24px;height:24px;border-radius:50%;flex:0 0 24px;margin-top:1px}
-.account-text{display:flex;flex-direction:column;line-height:1.3;overflow:hidden;flex:1}
+.account:hover{background:#3a3634}
+.account-avatar{width:30px;height:30px;border-radius:50%;flex:0 0 30px;object-fit:cover}
+.account-text{display:flex;flex-direction:column;line-height:1.28;overflow:hidden;flex:1}
 .account-name{font-size:12.5px;font-weight:600;white-space:nowrap}
 .account-sub{font-size:10.5px;color:var(--text-dim)}
-.chev{color:var(--text-dim);flex:0 0 auto;align-self:flex-start;margin-top:2px}
+.chev{position:absolute;right:9px;top:11px;color:var(--text-dim)}
 
 .nav{display:flex;flex-direction:column}
 .nav-item{
-  position:relative;display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;
-  text-align:left;width:100%;padding:6px 8px;min-height:44px;color:var(--text-dim);
-  font-size:10.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;line-height:1.15;
+  position:relative;display:flex;align-items:center;gap:9px;background:none;border:none;cursor:pointer;
+  text-align:left;width:100%;padding:0 10px;min-height:51px;color:var(--text-dim);
+  font-size:10.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;line-height:1.18;
   border-bottom:1px solid var(--divider);
 }
-.nav-item:hover{background:#3b3734;color:var(--text)}
+.nav-item:hover{background:#3a3634;color:var(--text)}
 .nav-item.active{background:var(--nav-active);color:#fff}
-.nav-ico{width:27px;height:27px;flex:0 0 27px;display:flex;align-items:center;justify-content:center;color:#d6d6d6}
+.nav-ico{width:29px;height:29px;flex:0 0 29px;display:flex;align-items:center;justify-content:center;color:#d6d6d6}
 .nav-ico img{width:25px;height:25px;object-fit:contain}
-.nav-ico img.ico-java{width:26px;height:26px}
+.nav-ico img.ico-tile{width:29px;height:29px;border-radius:3px;object-fit:cover}
 .nav-label{flex:1}
-.nav-item .dot{position:absolute;left:29px;top:8px;width:6px;height:6px;background:#5bbf3a;box-shadow:0 0 0 1.5px var(--sidebar-bg)}
-.nav-item.small{min-height:40px}
-.nav-item.small .nav-ico{width:25px;flex-basis:25px}
+.nav-item .dot{position:absolute;left:32px;top:12px;width:6px;height:6px;background:#5bbf3a;box-shadow:0 0 0 1.5px var(--sidebar-bg)}
+.nav-item.small{min-height:50px}
+.nav-item.small .nav-ico{width:27px;flex-basis:27px}
 
 .nav-spacer{flex:1;border-bottom:1px solid var(--divider)}
 .nav-bottom .nav-item:first-child{border-top:1px solid var(--divider)}
-.build-version{color:var(--text-faint);font-size:10px;padding:7px 9px 9px}
+.build-version{color:var(--text-faint);font-size:10px;height:17px;line-height:17px;padding:0 10px}
 
 /* ===================== CONTENT ===================== */
 .content{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--content-bg)}
 .menu-btn{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:4px}
 .sidebar-scrim{display:none}
-.content-head{position:relative;height:68px;padding:12px 20px 0;background:var(--head-bg);border-bottom:1px solid #000}
+.content-head{position:relative;height:67px;padding:13px 18px 0;background:var(--head-bg);border-bottom:1px solid #000}
 .content-label{font-size:10px;font-weight:700;letter-spacing:.6px;color:#cbc6c2;text-transform:uppercase}
-.tabs{display:flex;gap:20px;margin-top:9px}
-.tab{background:none;border:none;cursor:pointer;color:#b0aaa6;font-size:13.5px;font-weight:600;padding:6px 1px 8px;position:relative;font-family:inherit}
+.tabs{display:flex;gap:30px;margin-top:10px}
+.tab{background:none;border:none;cursor:pointer;color:#b0aaa6;font-size:13.5px;font-weight:600;padding:5px 0 9px;position:relative;font-family:inherit}
 .tab:hover{color:#fff}
 .tab.active{color:#fff}
 .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;background:#fff;border-radius:1px}
@@ -85,73 +85,99 @@ img{display:block;max-width:100%}
 .tab-panel.active{display:block}
 
 /* ===================== HERO ===================== */
-.hero{position:relative;width:100%;height:388px;overflow:hidden;background:#0b1622}
+.hero{position:relative;width:100%;height:406px;overflow:hidden;background:#0b1622}
 .hero-clip{position:absolute;inset:0;overflow:hidden}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.hero-art{position:absolute;left:0;top:0;width:calc(100% - 349px);height:100%;object-fit:cover;object-position:left top}
+.hero-art{position:absolute;left:0;top:0;width:calc(100% - 326px);height:100%;object-fit:cover;object-position:left top}
 
-/* Realm promo (right column) */
+/* Realm promo (right column) — lightened panel with a soft fade toward the bottom */
 .realm-promo{
-  position:absolute;top:0;right:0;width:349px;height:100%;
-  background:linear-gradient(180deg,rgba(9,8,7,.985) 0%,rgba(9,8,7,.965) 60%,rgba(9,8,7,.55) 80%,rgba(9,8,7,.12) 100%);
-  padding:11px 24px;display:flex;flex-direction:column;
+  position:absolute;top:0;right:0;width:326px;height:100%;
+  background:linear-gradient(180deg,rgba(22,20,18,.965) 0%,rgba(22,20,18,.95) 58%,rgba(22,20,18,.55) 82%,rgba(22,20,18,.08) 100%);
+  padding:17px 27px 0;display:flex;flex-direction:column;
 }
 .rp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;color:#fff;
-  font-family:'Pixelify Sans',sans-serif;font-size:20px;font-weight:600;line-height:1.16;letter-spacing:.2px}
-.rp-head svg{color:#efefef;flex:0 0 auto;margin-top:4px}
-.realm-promo p{color:#d4d1ce;font-size:15px;line-height:1.5;margin:11px 0 14px}
+  font-family:'Minecraft','Noto Sans',sans-serif;font-size:18px;font-weight:400;line-height:1.28;letter-spacing:.2px}
+.rp-head svg{color:#efefef;flex:0 0 auto;margin-top:3px}
+.realm-promo p{color:#d4d1ce;font-size:15px;line-height:1.5;margin:12px 0 16px}
 .btn-purple{
   position:relative;align-self:center;background:#8154d8;color:#fff;border:none;cursor:pointer;
-  font-family:'Pixelify Sans',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.3px;
-  padding:5px 12px;border-radius:2px;
+  font-family:'Minecraft','Noto Sans',sans-serif;font-weight:400;font-size:13px;letter-spacing:.3px;
+  padding:6px 15px;border-radius:2px;
   box-shadow:inset -2px -2px 0 rgba(0,0,0,.32), inset 2px 2px 0 rgba(255,255,255,.28);
 }
 .btn-purple::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);width:8px;height:5px;background:#8154d8;box-shadow:inset -2px -2px 0 rgba(0,0,0,.32)}
 .btn-purple:hover{background:#9163e6}
 
+/* trailer / preview button — click target layered over the button baked into the hero art */
+.hero-trailer{position:absolute;left:7px;top:364px;width:31px;height:31px;background:none;border:none;cursor:pointer;z-index:5}
+.hero-trailer svg{display:none}
+
 /* gift ad (real asset) */
-.gift-ad{position:absolute;right:10px;bottom:0;width:343px;height:40px;line-height:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.gift-ad{position:absolute;right:9px;bottom:9px;width:336px;height:43px;line-height:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 .gift-ad img{width:100%;height:100%;object-fit:fill;display:block}
 .gift-close{position:absolute;top:6%;bottom:6%;left:60.5%;width:8%;background:none;border:none;cursor:pointer}
 
-/* ===================== CONTROL BAR ===================== */
-.play-bar{position:relative;height:94px;background:var(--content-bg)}
+/* ===================== PLAY STRIP ===================== */
+.play-bar{position:relative;height:58px;background:#252422}
 
 .version-select{
-  position:absolute;left:6px;top:11px;width:204px;height:38px;display:flex;align-items:center;gap:7px;
-  background:#262220;border:1px solid #4a4542;border-radius:2px;cursor:pointer;padding:3px 7px;
+  position:absolute;left:4px;top:6px;width:256px;height:45px;display:flex;align-items:center;gap:8px;
+  background:#262220;border:1px solid #4a4542;border-radius:0;cursor:pointer;padding:3px 9px;
   color:var(--text);text-align:left;font-family:inherit;
 }
 .version-select:hover{background:#2d2825}
-.vs-ico{width:28px;height:28px;flex:0 0 28px;display:flex;align-items:center;justify-content:center}
-.vs-ico img{width:26px;height:26px;image-rendering:auto}
-.vs-text{display:flex;flex-direction:column;flex:1;overflow:hidden;line-height:1.28}
-.vs-name{font-size:12px;font-weight:700;white-space:nowrap}
-.vs-sub{font-size:10px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vs-ico{width:30px;height:30px;flex:0 0 30px;display:flex;align-items:center;justify-content:center}
+.vs-ico img{width:28px;height:28px;image-rendering:auto}
+.vs-text{display:flex;flex-direction:column;flex:1;overflow:hidden;line-height:1.3}
+.vs-name{font-size:12.5px;font-weight:700;white-space:nowrap}
+.vs-sub{font-size:10.5px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vs-chev{color:var(--text-dim);flex:0 0 auto}
 
-.play-btn{position:absolute;left:calc(50% - 52px);top:-13px;transform:translateX(-50%);
-  width:206px;height:46px;background:none;border:none;padding:0;cursor:pointer;line-height:0}
+.play-btn{position:absolute;left:340px;top:-22px;
+  width:216px;height:50px;background:none;border:none;padding:0;cursor:pointer;line-height:0}
 .play-btn img{width:100%;height:100%;object-fit:fill;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
 .play-btn:hover img{filter:drop-shadow(0 3px 5px rgba(0,0,0,.55)) brightness(1.05)}
-.play-btn:active{transform:translateX(-50%) translateY(1px)}
+.play-btn:active{transform:translateY(1px)}
 
-.server-stack{position:absolute;left:calc(50% + 54px);top:-9px;height:63px;display:flex;align-items:center;cursor:pointer}
-.server-stack svg{height:61px;width:auto;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
-.kebab{position:absolute;left:calc(50% + 105px);top:18px;background:none;border:none;color:#a29c98;cursor:pointer;padding:3px}
+/* PLAY button states (preparing / downloading / launching) */
+.play-status{position:absolute;left:340px;top:-22px;width:216px;height:50px;display:none;
+  align-items:center;justify-content:center;flex-direction:column;gap:2px;cursor:default;
+  background:linear-gradient(180deg,#57a233,#3f7d24);border:none;border-radius:2px;color:#fff;
+  font-family:'Minecraft','Noto Sans',sans-serif;font-size:12px;letter-spacing:.4px;overflow:hidden;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 2px 4px rgba(0,0,0,.4)}
+.play-bar.busy .play-btn{display:none}
+.play-bar.busy .play-status{display:flex}
+.ps-pct{font-size:10px;opacity:.85}
+.ps-bar{position:absolute;left:0;bottom:0;height:4px;width:0;background:#aee271;transition:width .18s linear}
+
+.quick-play{position:absolute;left:574px;top:-20px;height:64px;background:none;border:none;padding:0;cursor:pointer;display:flex;align-items:center}
+.quick-play img{height:64px;width:auto;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.quick-play:hover{filter:brightness(1.08)}
+.kebab{position:absolute;left:628px;top:17px;background:none;border:none;color:#a29c98;cursor:pointer;padding:3px}
 .kebab:hover{color:#fff}
 
-.gamepass-img{position:absolute;left:calc(50% - 52px);top:43px;transform:translateX(-50%);width:206px;height:auto}
+.gamepass-img{position:absolute;left:361px;top:34px;width:176px;height:auto}
 
-.username{position:absolute;right:10px;top:24px;display:flex;align-items:center;gap:5px;color:#d6d2cf;font-size:12.5px}
+.username{position:absolute;right:12px;top:20px;display:flex;align-items:center;gap:5px;color:#d6d2cf;font-size:12.5px}
 .copy-btn{background:none;border:none;color:#a29c98;cursor:pointer;padding:1px}
 .copy-btn:hover{color:#fff}
+.copy-btn.copied{color:#7bbf4a}
+
+/* popup menus (account / version / quick play / kebab) */
+.mc-menu{position:fixed;z-index:11000;min-width:184px;background:#2a2724;border:1px solid #454039;border-radius:3px;
+  box-shadow:0 8px 26px rgba(0,0,0,.55);padding:4px;font-family:'Noto Sans',sans-serif}
+.mc-mi{display:block;width:100%;text-align:left;background:none;border:none;color:#e6e3e0;font-size:12.5px;
+  padding:8px 12px;cursor:pointer;border-radius:2px;white-space:nowrap}
+.mc-mi:hover{background:#3a3531}
+.mc-mi.active{color:#7bbf4a}
+.mc-sep{height:1px;background:#454039;margin:4px 2px}
 
 /* ===================== NEWS ROW ===================== */
-.news-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:6px 20px 24px}
-.news-card{background:var(--panel);border-radius:4px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
-  min-height:150px;border:1px solid #2c2724;transition:transform .12s ease,border-color .12s ease}
-.news-card:hover{transform:translateY(-2px);border-color:#403a36}
+.news-row{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;padding:22px 50px 30px}
+.news-card{background:var(--panel);border-radius:0;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
+  min-height:150px;border:1px solid #4a4642;transition:border-color .12s ease,filter .12s ease}
+.news-card:hover{border-color:#6c665f;filter:brightness(1.07)}
 .news-card .nc-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#2a2624}
 .news-card .nc-body{padding:11px 12px 14px}
 .news-card .nc-cat{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#a08fce;margin-bottom:5px}
@@ -174,10 +200,10 @@ img{display:block;max-width:100%}
 
 .gift-ad2{position:absolute;right:8px;bottom:34px;display:flex;align-items:stretch;gap:6px;height:38px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 .gift-ad2 .ga-box{background:var(--gift-bg);display:flex;align-items:center;gap:9px;padding:4px 9px 4px 12px;border-radius:2px}
-.gift-ad2 .ga-text{font-family:'Pixelify Sans',sans-serif;font-size:11px;line-height:1.16;color:#fff;max-width:212px}
+.gift-ad2 .ga-text{font-family:'Noto Sans',sans-serif;font-size:11px;line-height:1.16;color:#fff;max-width:212px}
 .gift-ad2 .ga-div{width:1px;align-self:stretch;background:rgba(255,255,255,.4);margin:5px 0}
 .gift-ad2 .ga-x{background:none;border:none;color:#fff;cursor:pointer;font-size:15px;line-height:1;padding:0 2px}
-.gift-ad2 .ga-buy{background:#514d4c;color:#fff;border:none;cursor:pointer;border-radius:2px;padding:0 11px;font-family:'Pixelify Sans',sans-serif;font-size:11px;display:flex;align-items:center;gap:5px}
+.gift-ad2 .ga-buy{background:#514d4c;color:#fff;border:none;cursor:pointer;border-radius:2px;padding:0 11px;font-family:'Noto Sans',sans-serif;font-size:11px;display:flex;align-items:center;gap:5px}
 .gift-ad2 .ga-buy:hover{background:#5f5b59}
 
 .install-controls{position:relative;height:50px;background:var(--content-bg)}
@@ -393,12 +419,13 @@ img{display:block;max-width:100%}
   .tab{white-space:nowrap;padding-bottom:10px}
   .hero{height:auto;aspect-ratio:652/358;overflow:hidden}
   .hero-art{width:100%;object-position:center}
-  .realm-promo,.gift-ad,.hero-media{display:none}
+  .realm-promo,.gift-ad,.hero-media,.hero-trailer{display:none}
   .play-bar{position:static;height:auto;display:flex;flex-direction:column;align-items:center;gap:11px;padding:14px 16px 20px}
   .version-select{position:static;left:auto;top:auto;transform:none;width:100%;max-width:360px;height:46px}
   .play-btn{position:static;left:auto;top:auto;transform:none;width:min(72vw,240px);height:54px}
   .play-btn:active{transform:translateY(1px)}
-  .server-stack,.kebab{display:none}
+  .quick-play,.kebab{display:none}
+  .play-bar.busy .play-status{position:static;left:auto;top:auto;width:min(72vw,240px);height:54px;margin:0 auto}
   .gamepass-img{position:static;left:auto;top:auto;transform:none;width:210px}
   .username{position:static;left:auto;top:auto;right:auto}
   .news-row{grid-template-columns:1fr;padding:10px 16px 28px}
